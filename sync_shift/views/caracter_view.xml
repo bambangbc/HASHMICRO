@@ -1,0 +1,71 @@
+<odoo>
+	<data>
+
+	    <!--View Tes Character-->
+
+	    <record id="tes_caracter_tree" model="ir.ui.view">
+            <field name="name">caracter.tree</field>
+            <field name="model">caracter</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Master Shift">
+                	<field name="input_1"/>
+                    <field name="input_2"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="tes_caracter_form" model="ir.ui.view">
+            <field name="name">caracter.form</field>
+            <field name="model">caracter</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <form string="Tes Caracter">
+                    <sheet>            
+                        <group>
+                            <group string="Tes Character">
+                                <field name="input_1" required="1"/>
+                                <field name="input_2" required="1"/>
+                                <label for="hasil" string="hasil"/>
+                                <div class="o_row">
+                                    <div name="hasil">
+                                    	<field name="hasil"  readonly="1"/> 
+                                        <span>(%%)</span>
+                                    </div>
+                                </div>
+                                <button string="Generate" type="object" name="generate_caracter" class="oe_highlight"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+	    <record id="action_tes_caracter" model="ir.actions.act_window">
+	        <field name="name">Tes Caracter</field>
+	        <field name="res_model">caracter</field>
+	        <field name="view_mode">tree,form</field>
+	        <field name="help" type="html">
+	            <p class="oe_view_nocontent_create">
+	                Click to add a master shift
+	            </p>
+	        <p>klik tombol create untuk master shift baru</p>
+	        </field>
+	    </record>
+
+
+	     <menuitem
+            id="menu_caracter"
+            name="Caracter"
+            web_icon="hr,static/description/icon.png"
+            sequence="75"/>
+
+	    <menuitem
+			id="caracter"
+			name="Tes Caracter"
+			action="action_tes_caracter"
+			parent="menu_caracter"
+			sequence="11"/>
+
+	</data>
+</odoo>

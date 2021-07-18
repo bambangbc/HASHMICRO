@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+view_hr_shift,view.hr.shift,sync_shift.model_hr_shift,base.group_user,1,1,1,1
+view_hr_terlambat,view.hr.terlambat,sync_shift.model_hr_terlambat,base.group_user,1,1,1,1
+view_tes_caracter,view.tes.caracter,sync_shift.model_caracter,base.group_user,1,1,1,1

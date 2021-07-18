@@ -1,0 +1,133 @@
+<odoo>
+	<data>
+		
+		<!-- view data absensi -->
+		<record id="view_attendace_finger" model="ir.ui.view">
+	        <field name="name">additional.tree.view.hr.attendance.finger</field>
+	        <field name="model">hr.attendance</field>
+	        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+	        <field name="arch" type="xml">
+	            <xpath expr="//field[@name='employee_id']" position="after">
+	                <field name="absen_id" required="1"/>
+	                <field name="no_mesin" required="1"/>
+	                <field name="check_in_working" required="1"/>
+	                <field name="check_out_working" required="1"/>
+	            </xpath>
+	            <xpath expr="//field[@name='worked_hours']" position="after">
+	                <field name="terlambat" widget="float_time"/>
+	                <field name="denda"/>
+	            </xpath>	
+	        </field>
+	    </record>
+
+		<!-- View Master Shift -->
+		<record id="action_resource_calendar_list" model="ir.actions.act_window">
+	        <field name="name">Jadwal Karyawan</field>
+	        <field name="res_model">resource.calendar</field>
+	        <field name="view_mode">tree,form</field>
+	        <field name="help" type="html">
+	            <p class="oe_view_nocontent_create">
+	                Click to add a master shift
+	            </p>
+	        <p>klik tombol create untuk master shift baru</p>
+	        </field>
+	    </record>
+
+	    <!--View Master Shift-->
+
+	    <record id="view_hr_shift_line_filter" model="ir.ui.view">
+            <field name="name">hr.shift.line.select</field>
+            <field name="model">hr.shift</field>
+            <field name="arch" type="xml">
+                <search string="Search shift Lines">
+                    <field name="employee_id" string="employee" />
+                    <group col="8" colspan="4" expand="0" string="Group By">
+                        <filter string="employee" name="employee_id" context="{'group_by':'employee_id'}"/>
+                        <filter string="Department" name="department_id" context="{'group_by':'department_id'}"/>
+                        <filter string="Shift Type" name="shift_type" context="{'group_by':'shift_type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+	    <record id="shift_management_tree" model="ir.ui.view">
+            <field name="name">hr.shift.tree</field>
+            <field name="model">hr.shift</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Master Shift" editable="bottom">
+                	<field name="number"/>
+                    <field name="employee_id" required="1"/>
+                    <field name="department_id"/>
+                    <field name="start_date" required="1"/>
+                    <field name="end_date" required="1"/>
+                    <field name="shift_type" required="1"/>
+                    <field name="status" readonly="1"/>
+                    <button name="confirm_shift" type="object" string="Confirm" class="oe_highlight" attrs="{'invisible':[('status','=','confirmed')]}"/>
+                    <button name="set_to_draft" type="object" string="Set To Draft" class="oe_highlight" attrs="{'invisible':[('status','!=','confirmed')]}"/>
+                </tree>
+            </field>
+        </record>
+
+	    <record id="action_shift_management" model="ir.actions.act_window">
+	        <field name="name">Shift Management</field>
+	        <field name="res_model">hr.shift</field>
+	        <field name="view_mode">tree,form</field>
+	        <field name="help" type="html">
+	            <p class="oe_view_nocontent_create">
+	                Click to add a master shift
+	            </p>
+	        <p>klik tombol create untuk master shift baru</p>
+	        </field>
+	    </record>
+
+	    <!--View Master Terlambat-->
+
+	    <record id="hr_terlambat_tree" model="ir.ui.view">
+            <field name="name">hr.shift.tree</field>
+            <field name="model">hr.terlambat</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Master Shift" editable="bottom">
+                	<field name="denda"/>
+                    <field name="terlambat_dari" required="1" widget="float_time"/>
+                    <field name="terlambat_sampai" required="1" widget="float_time"/>
+                </tree>
+            </field>
+        </record>
+
+	    <record id="action_master_terlambat" model="ir.actions.act_window">
+	        <field name="name">Master Terlambat</field>
+	        <field name="res_model">hr.terlambat</field>
+	        <field name="view_mode">tree</field>
+	        <field name="help" type="html">
+	            <p class="oe_view_nocontent_create">
+	                Click to add a master shift
+	            </p>
+	        <p>klik tombol create untuk master shift baru</p>
+	        </field>
+	    </record>
+
+	    <menuitem
+			id="hr_shift"
+			name="Shitf Karyawan"
+			action="action_shift_management"
+			parent="hr_attendance.menu_hr_attendance_root"
+			sequence="11"/>
+
+		<menuitem
+			id="hr_terlambat"
+			name="Master Terlambat"
+			action="action_master_terlambat"
+			parent="hr_attendance.menu_hr_attendance_root"
+			sequence="12"/>
+
+		<menuitem
+			id="hr_resource_calendar"
+			name="Master Jadwal"
+			action="action_resource_calendar_list"
+			parent="hr_attendance.menu_hr_attendance_root"
+			sequence="10"/>
+
+	</data>
+</odoo>

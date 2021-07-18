@@ -11,6 +11,7 @@
                 <tree string="Master Shift">
                 	<field name="input_1"/>
                     <field name="input_2"/>
+                    <field name="hasil"/>
                 </tree>
             </field>
         </record>

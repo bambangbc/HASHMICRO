@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+        <template id="report_work_order">
+            <t t-name="booking_order_BAMBANGBAGUSCANDRA_2072021.report_work_order">
+		        <t t-call="report.html_container">
+		            <t t-foreach="docs" t-as="o">
+		                <div class="page">
+		                    <div class="row">
+		                        <table style="width: 528px;" >
+		                            <tr>
+		                                <td style="width: 528px; border: 1px solid"><span t-field="o.wo_number"/></td>
+		                            </tr>
+		                            <tr>
+		                                <td style="width: 25%; border: 1px solid">Team Name</td>
+		                                <td style="width: 25%; border: 1px solid"><span t-field="o.wo_number"/></td>
+		                                <td style="width: 25%; border: 1px solid">Customer</td>
+		                               	<td style="width: 25%; border: 1px solid"><span t-field="o.bo_reference.partner_id.name"/></td>
+		                            </tr>
+		                            <tr>
+		                                <td style="width: 25%; border: 1px solid">Boking Order Ref</td>
+		                                <td style="width: 25%; border: 1px solid"><span t-field="o.bo_reference.name"/></td>
+		                                <td style="width: 25%; border: 1px solid">Date</td>
+		                               	<td style="width: 25%; border: 1px solid"><span t-field="o.date_start" t-field-options="{&quot;format&quot;: &quot;dd MMMM y&quot;}"/> - <span t-field="o.date_end" t-field-options="{&quot;format&quot;: &quot;dd MMMM y&quot;}"/></td>
+		                            </tr>
+		                            <tr>
+		                                <td width="100%" style="border: 1px solid">NOTES :
+		                                	<br/>
+		                                	<span t-field="o.note"/></td>
+		                            </tr>
+		                            <tr>
+		                                <td width="100%" style="border: 1px solid">Signature :
+		                                	<br/>
+		                                	<br/>
+		                                	<br/>
+		                                </td>
+		                            </tr>
+		                        </table>
+		                    </div>
+		                </div>
+		            </t>
+		        </t>
+		    </t>
+	    </template>
+	</data>
+</odoo>

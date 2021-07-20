@@ -2,6 +2,7 @@ import time
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from odoo import models, fields, api, exceptions, _
+from odoo.osv import osv
 
 
 class service_team(models.Model):
@@ -36,19 +37,14 @@ class sale_orders(models.Model):
 			self.team_leader = team.team_leader.id
 			self.team_members = team_members
 
-#	@api.multi
-#	def action_check(self):
-#		for check in self :
-#			
-#			clause_1 = [('planned_start','>',self.booking_end),('planned_end','>',self.booking_start)]
-#			clause_2 = [('team_leader','=',self.team_leader),('team_members','=',self.team_members)]
-#			clause_final = [('state','!=','cancelled')] + clause_1 + clause_2
-#			wo = self.env['work.order'].search([(clause_final)])
-#			import pdb.pdb.set_trace()
-#			if wo :
-#				raise osv.except_osv(_('Warning!'),_('Team already has work order during that period on SOXX'))
-#			else :
-#				raise osv.except_osv(_('Warning!'),_('Team is available for booking'))
+	@api.multi
+	def action_check(self):
+		for check in self :
+			wo = self.env['work.order'].search(['|','|','|',('team_leader','in',[g.id for g in self.team_members]),('team_members','in',[self.team_leader.id]),('team_leader','=',self.team_leader.id),('team_members','in',[g.id for g in self.team_members]),('state','!=','cancelled'),('planned_start','<=',self.booking_end),('planned_end','>=',self.booking_start)], limit=1)
+			if wo :
+				raise osv.except_osv(_('Warning!'),_('Team already has work order during that period on SOXX'))
+			else :
+				raise osv.except_osv(_('Warning!'),_('Team is available for booking'))
 
 
 

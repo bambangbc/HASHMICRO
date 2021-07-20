@@ -13,7 +13,7 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
         	<xpath expr='//button[@name="action_confirm"]' position="after">
-        		<button name="action_check" string="Check" class="btn-primary"/>
+        		<button name="action_check" string="Check" class="btn-primary" type="object"/>
         	</xpath>
         	<field name="partner_id" position="after">
         		<field name="is_booking_order" invisible="1"/>

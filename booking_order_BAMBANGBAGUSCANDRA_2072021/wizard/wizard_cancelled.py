@@ -10,7 +10,6 @@ class cancelled(models.TransientModel):
 
 	@api.multi
 	def cancelled(self):
-		import pdb;pdb.set_trace()
 		cancel = self.env['work.order'].browse(self.env.context['active_id'])
 		cancel_create = cancel.update({'note': self.note, 'state': 'cancelled'})
 

@@ -34,7 +34,9 @@
         'views/booking_order.xml',
         'report/report_work_order.xml',
         'report/report.xml',
-        'data/data.xml'
+        'data/data.xml',
+        'security/ir.model.access.csv',
+
     ],
     'installable': True,
     'auto_install': False,

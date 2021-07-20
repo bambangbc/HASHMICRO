@@ -5,12 +5,12 @@
             <field name="name">cancelled.wo.form</field>
             <field name="model">cancelled.wo</field>
             <field name="arch" type="xml">
-                <form string="cancelled Form">
-                    <group string="Note cancelled">
+                <form string="Reason for cancellation">
+                    <group string="Reason for cancellation">
                         <field name="note"/>
                     </group>
                     <footer>
-                        <button name="cancelled" string="Ok" type="object" class="btn-primary"/>
+                        <button name="cancelled" string="Confirm" type="object" class="btn-primary"/>
                         <button string="Cancel" class="btn-default" special="cancel" />
                     </footer>
                 </form>

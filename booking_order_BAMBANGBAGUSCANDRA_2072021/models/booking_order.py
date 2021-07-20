@@ -73,9 +73,9 @@ class SaleOrder(models.Model):
 							'team_leader' :order.team_leader.id,
 							'team_members' : [(4, order.team_members.ids)],
 							'planned_start' : order.booking_start,
-							'planned_end' : order.booking_end,
-							'date_start' : order.booking_start,
-							'date_end' : order.booking_end,})
+							'planned_end' : order.booking_end,})
+							#'date_start' : order.booking_start,
+							#'date_end' : order.booking_end,})
 
 			
 
@@ -110,15 +110,15 @@ class work_order(models.Model):
 
 	@api.multi
 	def start_work(self):
-		return self.write({'state':'in_progress'})
+		return self.write({'state':'in_progress','date_start':str(datetime.now())})
 
 	@api.multi
 	def end_work(self):
-		return self.write({'state':'done'})
+		return self.write({'state':'done','date_end':str(datetime.now())})
 
 	@api.multi
 	def reset(self):
-		return self.write({'state':'pending'})
+		return self.write({'state':'pending','date_start':''})
 
 	@api.multi
 	def cancel(self):
